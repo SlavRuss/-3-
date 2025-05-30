@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{{ css_url }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/4.6.1/css/bootstrap.min.css">
+
+    <title>{{ cat }}</title>
+</head>
+<body>
+
+<header class="header fixed-top">
+    <a href="{{ url_for('reload') }}" id="reloadButton">КИС-КИС-КИС</a>
+    <div class="container">
+        <div class="row align-items-center">
+            <nav class="nav">
+                <a href="#cat" title="cat">Домой</a>
+                <a href="#photoloader" title="To return">Угадайка</a>
+                <a href="#result" title="result">Результаты</a>
+            </nav>
+        </div>
+    </div>
+</header>
+
+<section class="cat" id="cat">
+   <div class="container">
+      <div class="row align-items-center text-center text-md-left min-vh-100">
+         <div class="col-md-3">
+            <span class="span1">Угадай</span>
+            <span class="span2">Кто ты из котов</span>
+            <a href="#photoloader" class="link-btn" id="startButton">Go</a>
+         </div>
+      </div>
+   </div>
+</section>
+
+<section class="photoloader" id="photoloader">
+   <div class="container d-flex align-items-center justify-content-center" style="height: 100%;">
+      <div class="row align-items-center">
+         <div class="col-md-6">
+            <div class="image-upload-container">
+               <form id="uploadForm" method="post" enctype="multipart/form-data" action="{{ url_for('upload_file') }}">
+                  <label for="imageUpload" class="upload-label">
+                     <div class="preview-container">
+                        <img id="imagePreview" src="{{ default_image }}" class="preview-image" alt="Preview">
+                        <div class="upload-icon">
+                           <i class="fas fa-camera"></i>
+                           <span>Загрузите фото</span>
+                        </div>
+                     </div>
+                  </label>
+                  <input type="file" id="imageUpload" name="file" accept="image/*" style="display: none;">
+                  <input type="hidden" id="imageData" name="image_data">
+               </form>
+            </div>
+         </div>
+         <div class="col-md-6 text-center text-md-left">
+            <h3 class="title2">Загрузка</h3>
+            <p class="mb-4">Загрузи сюда свою фотографию или фотографию другого человека или животного.</p>
+            <button class="link-btn" id="nextButton">Далее</button>
+         </div>
+      </div>
+   </div>
+</section>
+
+<!-- В секции result -->
+<section class="result" id="result">
+   <div class="container">
+      {% if result %}
+      <div class="result-container text-center">
+         <h1 class="heading mb-4">Вы похожи на:</h1>
+         <div class="row justify-content-center">
+            <div class="col-md-5 mb-4">
+               <div class="result-card h-100">
+                  <h3>Ваше фото</h3>
+                  <div class="image-container">
+                     <img src="{{ result.user_image }}" class="result-image img-fluid" alt="Ваше фото">
+                  </div>
+               </div>
+            </div>
+            <div class="col-md-5 mb-4">
+               <div class="result-card h-100">
+                  <h3>{{ result.name }}</h3>
+                  <div class="image-container">
+                     <img src="{{ result.class_image }}" class="result-image img-fluid" alt="{{ result.name }}">
+                  </div>
+                  <div class="result-info mt-3">
+                     <p class="description">{{ result.description }}</p>
+                     <p class="confidence">Точность: <span class="badge bg-primary">{{ result.confidence }}%</span></p>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      {% else %}
+      <div class="no-result text-center py-5">
+         <h1 class="mb-4">Пока что вы...</h1>
+         <div class="image-container mx-auto">
+            <img src="{{ default_image }}" class="result-image img-fluid" alt="Кот по умолчанию">
+         </div>
+         <div class="result-info mt-4">
+            <h3>Анонимный котик</h3>
+            <p>Загрузите фото, чтобы узнать результат!</p>
+         </div>
+      </div>
+      {% endif %}
+   </div>
+</section>
+
+<script src="{{ js_url }}"></script>
+<script>
+    let imageFile = null;
+
+    // Обработка загрузки изображения
+    document.getElementById('imageUpload').addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            imageFile = file;
+            const reader = new FileReader();
+            reader.onload = function(event) {
+                document.getElementById('imagePreview').src = event.target.result;
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    // Обработка кнопки "Далее"
+    document.getElementById('nextButton').addEventListener('click', function() {
+        if (imageFile) {
+            const formData = new FormData();
+            formData.append('file', imageFile);
+
+            fetch("{{ url_for('upload_file') }}", {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.text())
+            .then(html => {
+                // Обновляем только секцию result
+                document.getElementById('result').outerHTML =
+                    new DOMParser().parseFromString(html, 'text/html')
+                    .getElementById('result').outerHTML;
+
+                // Прокручиваем к результатам
+                document.querySelector('#result').scrollIntoView({
+                    behavior: 'smooth'
+                });
+            })
+            .catch(error => console.error('Error:', error));
+        } else {
+            alert('Пожалуйста, загрузите фото сначала!');
+        }
+    });
+
+    // Плавный скролл
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+
+    // Плавное скрытие шапки
+    const header = document.querySelector('.header');
+    let lastScroll = 0;
+
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.pageYOffset;
+        if (currentScroll > 600 && currentScroll > lastScroll) {
+            header.style.top = '-80px';
+        } else {
+            header.style.top = '0';
+        }
+        lastScroll = currentScroll;
+    });
+</script>
+
+</body>
+</html>

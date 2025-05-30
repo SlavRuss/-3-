@@ -1,0 +1,444 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600&display=swap");
+/********************************************Первая страница**********************************************/
+* 
+{
+  font-family: 'Impact', sans-serif;
+  margin: 0;
+  padding: 0;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  outline: none;
+  border: none;
+  text-decoration: none !important;
+  -webkit-transition: all .2s linear;
+  transition: all .2s linear;
+}
+html 
+{
+  font-size: 125%;
+  
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  scroll-padding-top: 1rem;
+}
+section 
+{
+  padding: 5rem 1rem;
+}
+
+/*СКРОЛЛ*/
+html::-webkit-scrollbar 
+{
+  width: 0.5rem;
+}
+html::-webkit-scrollbar-track 
+{
+  background: transparent;
+}
+html::-webkit-scrollbar-thumb 
+{
+  background: #d8d6d6;
+}
+/*СКРОЛЛ*/
+
+/*ШАПКА*/
+.header 
+{
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: rgb(99, 91, 91); 
+  text-align: center;
+  padding: 0px 0;
+  z-index: 1000;
+}
+.nav a 
+{
+  font-size: 40px;
+  margin-right: 25px;
+  margin-left: 170px;
+  color: #352525;
+}
+#reloadButton 
+{
+  font-size: 2.5em;
+  color: rgb(43, 30, 30);
+}
+#reloadButton:hover 
+{
+  color: rgb(0, 0, 107);
+}
+/*ШАПКА*/
+
+/* Красные полоски по бокам */
+body::before 
+{
+  content: "";
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  width: 150px;
+  background-color: rgb(56, 51, 51);
+}
+/* Красные полоски по бокам */
+
+/*Вид кнопок*/
+.link-btn 
+{
+  margin-top: 1rem;
+  padding: 0.1rem 2rem;
+  display: inline-block;
+  border: 0.3rem solid #000000;
+  color: #001e80;
+  background: none;
+  cursor: pointer;
+  font-size: 1.7rem;
+}
+/*Вид кнопок*/
+
+/*Первая часть*/
+.cat 
+{
+  background: 
+  -webkit-gradient(linear, left top, left bottom, 
+  from(rgba(0, 0, 0, 0.7)), 
+  to(rgba(0, 0, 0, 0.7))), 
+  no-repeat;
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(186, 188, 216, 0.7)), no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  height: 1100px;
+}
+.cat .span1
+{
+  color: purple;
+  max-width: 600px;
+  font-size: 100px;
+}
+.cat .span2
+{
+  color: purple;
+  max-width: 600px;
+  font-size: 70px;
+}
+.cat .link-btn
+{
+  font-size: 3rem;
+  color: #332c44;
+  border-color: #000000;
+  margin-left: 450px;
+  margin-top: -200px;
+}
+/*Первая часть*/
+
+/*Вторая часть*/
+.photoloader
+{
+  background:
+    -webkit-gradient(linear, left top, left bottom,
+    from(rgba(255, 255, 255, 0.7)),
+    to(rgba(255, 255, 255, 0.7))),
+    no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  height: 100vh;
+  min-height: 1100px;
+  display: flex;
+  align-items: center;
+}
+
+.image-upload-container
+{
+  position: relative;
+  max-width: 700px;
+  margin: 0 auto;
+  height: 650px;
+}
+
+.preview-container
+{
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border: 2px dashed #000000;
+  border-radius: 5px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.preview-image
+{
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+.upload-label
+{
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  position: relative;
+}
+.photoloader span 
+{
+  color: #760b0b;
+}
+.photoloader .title2
+{
+  padding-top: 0.5rem;
+  font-size: 2rem;
+  text-transform: capitalize;
+  color: #22222e;
+}
+.photoloader .title1
+{
+  padding-top: 0.5rem;
+  font-size: 3rem;
+  text-transform: capitalize;
+  color: #22222e;
+}
+.photoloader p 
+{
+  padding: 1rem 0;
+  font-size: 1rem;
+  line-height: 1;
+  color: #3c0942;
+  margin-bottom: 10;
+}
+.photoloader .icons-container 
+{
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-top: 8rem;
+}
+.photoloader .icons-container .icons h3 
+{
+  font-size: 1.5rem;
+  text-transform: capitalize;
+  color: #ffffff;
+}
+.image-upload-container 
+{
+  position: relative;
+  max-width: 100%; 
+  margin: 0 auto;
+}
+.upload-label 
+{
+  display: block;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  position: relative;
+}
+.preview-container 
+{
+  position: relative;
+  width: 100%;
+  height: auto; 
+  border: 2px dashed #000000;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.preview-image
+{
+  width: 100%;
+  height: auto; 
+  object-fit: contain; 
+  display: block;
+}
+.upload-icon 
+{
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #ffffff;
+  z-index: 1;
+  background: rgba(255, 255, 255, 0.7);
+  padding: 10px 20px;
+  border-radius: 5px;
+  display: none;
+}
+.upload-icon i 
+{
+  font-size: 2rem;
+  margin-bottom: 5px;
+}
+.upload-label:hover .upload-icon 
+{
+  display: block;
+}
+.upload-label:hover .preview-image 
+{
+opacity: 0.7;
+}
+/*Вторая часть*/
+
+/*Третья часть*/
+.result 
+{
+  background: 
+  -webkit-gradient(linear, left top, left bottom, 
+  from(rgba(0, 0, 0, 0.7)), 
+  to(rgba(0, 0, 0, 0.7))), 
+  no-repeat;
+  background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(186, 188, 216, 0.7)), no-repeat;
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+  height: 1000px;
+}
+
+.result h1 
+{
+  font-size: 50px;
+}
+.result .box-container 
+{
+  display: grid; 
+  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr)); 
+  gap: 1rem;
+  justify-content: center; 
+  align-items: center; 
+  height: 100%; 
+}
+.result .box-container .box 
+{
+  text-align: center;
+  padding: 0,5rem 0rem;
+}
+.result .box-container .box:hover 
+{
+  background: #6f758aaf;
+  -webkit-box-shadow: 10 0.5rem 1rem #3327ddbd;
+  box-shadow: 0 0.5rem 1rem #9392d1c6;
+  
+  -webkit-transform: translateY(-1rem);
+  transform: translateY(-2rem);
+}
+.box .link-btn 
+{
+  margin-bottom: 1rem; 
+  background: #240d0d;
+}
+.result .box-container .box img 
+{
+  height: 14rem; 
+  margin-bottom: 0.9rem; 
+  border: 5px solid white; 
+  border-radius: 5px; 
+}
+.result .box-container .box h3 
+{
+  font-size: 2rem;
+  text-transform: capitalize;
+  color: #1e1434;
+}
+.result .box-container .box p 
+{
+  color: #000000;
+}
+.result-image
+{
+    max-width: 100%;
+    height: 300px;
+    object-fit: cover;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    border: 3px solid white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+.result-info
+{
+    background: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+    margin-top: 20px;
+}
+.result-info h3
+{
+    color: #4a2c82;
+    font-size: 2rem;
+    margin-bottom: 10px;
+}
+.result-info p
+{
+    font-size: 1.2rem;
+    color: #333;
+}
+.image-container
+{
+    height: 300px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    overflow: hidden;
+    border-radius: 10px;
+    background-color: #f8f9fa;
+    padding: 10px;
+}
+.result-image
+{
+    max-height: 100%;
+    max-width: 100%;
+    object-fit: contain;
+    border-radius: 8px;
+    border: 2px solid #dee2e6;
+}
+.result-card
+{
+    padding: 20px;
+    border-radius: 10px;
+    background: white;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+.result-card:hover
+{
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+.result-info
+{
+    padding: 15px;
+    background-color: #f8f9fa;
+    border-radius: 8px;
+}
+.description
+{
+    font-style: italic;
+    color: #6c757d;
+}
+.confidence .badge
+{
+    font-size: 1.1rem;
+    padding: 5px 10px;
+}
+@media (max-width: 768px)
+{
+    .image-container
+    {
+        height: 250px;
+    }
+    .result-container .row > div
+    {
+        margin-bottom: 20px;
+    }
+}
+/*Третья часть*/
+
+

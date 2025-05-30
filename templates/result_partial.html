@@ -1,0 +1,40 @@
+<div class="container">
+   {% if result %}
+   <div class="result-container text-center">
+      <h1 class="heading mb-4">Вы похожи на:</h1>
+      <div class="row justify-content-center">
+         <div class="col-md-5 mb-4">
+            <div class="result-card h-100">
+               <h3>Ваше фото</h3>
+               <div class="image-container">
+                  <img src="{{ result.user_image }}" class="result-image img-fluid" alt="Ваше фото">
+               </div>
+            </div>
+         </div>
+         <div class="col-md-5 mb-4">
+            <div class="result-card h-100">
+               <h3>{{ result.name }}</h3>
+               <div class="image-container">
+                  <img src="{{ result.class_image }}" class="result-image img-fluid" alt="{{ result.name }}">
+               </div>
+               <div class="result-info mt-3">
+                  <p class="description">{{ result.description }}</p>
+                  <p class="confidence">Точность: <span class="badge bg-primary">{{ result.confidence }}%</span></p>
+               </div>
+            </div>
+         </div>
+      </div>
+   </div>
+   {% else %}
+   <div class="no-result text-center py-5">
+      <h1 class="mb-4">Пока что вы...</h1>
+      <div class="image-container mx-auto">
+         <img src="{{ default_image }}" class="result-image img-fluid" alt="Кот по умолчанию">
+      </div>
+      <div class="result-info mt-4">
+         <h3>Анонимный котик</h3>
+         <p>Загрузите фото, чтобы узнать результат!</p>
+      </div>
+   </div>
+   {% endif %}
+</div>
